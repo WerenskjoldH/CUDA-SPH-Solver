@@ -9,6 +9,7 @@ float iTime = 0;
 
 solver* sphSolver;
 
+void initialize();
 void inputs();
 void update();
 void draw();
@@ -16,6 +17,8 @@ void draw();
 int main(int args, char* argv[])
 {
 	gameWindow = new window("SPH CUDA Flowmap - Hunter Werenskjold", WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	initialize();
 	
 	SDL_Event e;
 	while (gameWindow->checkIfRunning())
@@ -51,22 +54,42 @@ int main(int args, char* argv[])
 	return 0;
 }
 
+void initialize()
+{
+	sphSolver = new solver();
+	sphSolver->initialize();
+
+	for (int i = 0; i < 30; i++)
+		for(int j = 0; j < 28; j++)
+			sphSolver->addParticle(vector2f(0.1 + (i * 0.03), 0.1 + (j * 0.03)));
+
+	std::cout << sphSolver->currentParticles << std::endl;
+	
+}
+
 void inputs()
 {}
 
 void update()
 {
-	
+	sphSolver->update();
 }
 
 void draw()
 {
 	SDL_Renderer* renderer = gameWindow->getRenderer();
 
-	//SDL_SetRenderDrawColor(renderer, 200, 100, 100, 255);
-	//for (int i = 0; i < 40; i++) {
-	//	SDL_RenderDrawPoint(renderer, 20 * i + 200 + 10.f * sinf(iTime), 20 * i + 200 + 10.f * cosf(iTime));
-	//}
+	for (int x = 0; x < sphSolver->currentParticles; x++)
+	{
+		// Draw particles
+		if (sphSolver->particles[x].identifier == -1)
+			continue;
+
+		SDL_SetRenderDrawColor(renderer, 220, 220, 255, 255);
+
+		SDL_RenderDrawPoint(renderer, sphSolver->particles[x].position.x * WINDOW_WIDTH, sphSolver->particles[x].position.y * WINDOW_HEIGHT);
+		//gfxDrawBrenCircle(renderer, sphSolver->particles[x].position.x * WINDOW_WIDTH, sphSolver->particles[x].position.y * WINDOW_HEIGHT, 10, true);
+	}
 
 	gameWindow->renderWindow();
 }

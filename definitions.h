@@ -21,7 +21,7 @@
 #define DT 0.003				// 0.003 (default)
 
 #define GRAVITY_X 0.0			// I often use -9.8 here to corner the water and have to use fewer particles to see results
-#define GRAVITY_Y -4.5			// -9.8 (default)
+#define GRAVITY_Y 4.5			// -9.8 (default)
 
 // SPH Kernels
 #define POLY6 315.0/(64.0 * PI * (KERNEL*KERNEL*KERNEL*KERNEL*KERNEL*KERNEL*KERNEL*KERNEL*KERNEL))

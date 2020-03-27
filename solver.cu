@@ -145,7 +145,7 @@ void solver::initialize()
 void solver::update()
 {
 	int blocks;
-
+	
 	blocks = (currentParticles + (MAX_THREADS - 1)) / MAX_THREADS;
 
 	calculateDensityPressure <<<blocks, MAX_THREADS>>>(particles, currentParticles);
