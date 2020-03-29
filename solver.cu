@@ -196,6 +196,11 @@ void solver::addParticle(float mass, vector2f pos, vector2f vel)
 			}
 }
 
+void solver::clearParticles()
+{
+	currentParticles = 0;
+}
+
 // Add a wall - Currently Not Re-implemented
 void solver::addWall(vector2f pos)
 {

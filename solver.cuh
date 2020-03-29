@@ -54,6 +54,7 @@ public:
 	void update();
 	void addParticle(vector2f pos, vector2f vel = vector2f(0.0f, 0.0f));
 	void addParticle(float mass, vector2f pos, vector2f vel = vector2f(0.0f, 0.0f));
+	void clearParticles();
 
 	void addWall(vector2f pos);
 
