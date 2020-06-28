@@ -1,20 +1,22 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
+#include <stdio.h>
+
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include "vector2f.h"
 #include "definitions.h"
-
-#include <stdio.h>
 
 struct particle
 {
 	// Use for dynamic particles
 	particle(vector2f position, vector2f velocity, int id);
 
-	// Use for static - Currently Not Re-implemented
+	// Use for static particles
 	particle(vector2f position, int id);
+
+	void operator delete(void* ptr);
 
 	int identifier;
 

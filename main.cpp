@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <iostream>
+#include <memory>
+
 #include "window.h"
 #include "gfxHelper.h"
 #include "solver.cuh"
 
-window* gameWindow;
+std::shared_ptr<window> gameWindow;
 float iTime = 0;
 
-solver* sphSolver;
+std::unique_ptr<solver> sphSolver;
 
 int mouseX, mouseY;
 
@@ -18,7 +20,7 @@ void addParticleSquare(float x, float y, int numberOfParticles, float spacing, f
 
 int main(int args, char* argv[])
 {
-	gameWindow = new window("SPH CUDA Flowmap - Hunter Werenskjold", WINDOW_WIDTH, WINDOW_HEIGHT);
+	gameWindow = std::make_shared<window>("SPH CUDA Flowmap - Hunter Werenskjold", WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	initialize();
 
@@ -63,15 +65,12 @@ int main(int args, char* argv[])
 		iTime += DELTA_TIME;
 	}
 
-	// Delete the gameWindow object and Grid object before closing the application
-	delete gameWindow;
-
 	return 0;
 }
 
 void initialize()
 {
-	sphSolver = new solver();
+	sphSolver = std::make_unique<solver>();
 	sphSolver->initialize();
 
 	for (int i = 0; i < 30; i++)
@@ -115,8 +114,8 @@ void addParticleSquare(float x, float y, int numberOfParticles, float spacing, f
 	for(int i = -loopBounds; i < loopBounds; i++)
 		for (int j = -loopBounds; j < loopBounds; j++)
 		{
-			float offsetX = i * (spacing);
-			float offsetY = j * (spacing);
+			float offsetX = i * spacing;
+			float offsetY = j * spacing;
 			sphSolver->addParticle(particleMass, vector2f(worldCenterX + offsetX, worldCenterY + offsetY));
 		}
 }

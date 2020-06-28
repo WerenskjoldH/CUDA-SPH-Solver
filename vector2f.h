@@ -114,6 +114,7 @@ class vector2f
 				break;
 			default:
 				std::cout << "ERROR::VECTOR::OUT OF BOUNDS REQUEST" << std::endl;
+				return x;
 			}
 		}
 
@@ -130,6 +131,7 @@ class vector2f
 				break;
 			default:
 				std::cout << "ERROR::VECTOR::OUT OF BOUNDS REQUEST" << std::endl;
+				return x;
 			}
 		}
 

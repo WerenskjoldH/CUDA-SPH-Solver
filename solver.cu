@@ -111,6 +111,12 @@ particle::particle(vector2f position, int id) : position{ position }, identifier
 	acceleration = 0.f;
 }
 
+void particle::operator delete(void* ptr)
+{
+	cudaDeviceSynchronize();
+	cudaFree(ptr);
+}
+
 solver::solver()
 {
 	cudaMallocManaged(&particles, MAX_PARTICLES * sizeof(particle));
@@ -126,7 +132,9 @@ solver::solver()
 
 solver::~solver()
 {
-	cudaFree(particles);
+	for (int i = 0; i < MAX_PARTICLES; i++) {
+		delete& particles[i];
+	}
 }
 
 void solver::initialize()
