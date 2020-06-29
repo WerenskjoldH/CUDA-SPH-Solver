@@ -1,6 +1,11 @@
 #ifndef GFX_HELPER_H
 #define GFX_HELPER_H
 
+/*
+	I wrote this header-only helper to be used in most of my SDL projects
+		This is cut down and comments are limited
+*/
+
 #include <SDL/SDL.h>
 
 #define PI  3.14159265359

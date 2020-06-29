@@ -91,8 +91,9 @@ public:
 
 	// Functions //
 
-	/** Gets a cell from simulation space coordinates 
-		@param pos Simulation space coordinates
+	/** 
+		Gets a cell from screen space coordinates
+		@param pos Screen space coordinates
 		@return Pointer to cell at given simulation space coordinates
 	*/
 	cell* getCell(vector2f pos);
@@ -107,13 +108,12 @@ public:
 
 	int currentParticles = 0;
 
-	// This is calculated for us during update and relates to the number of blocks of threads CUDA will use
-	int blocks = 1;
-
 private:
 	/// Methods ///
 
 	// Procedures //
+
+	/* Update particle velocity and position as well as cell information */
 	void integration();
 
 

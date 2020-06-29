@@ -1,6 +1,11 @@
 #ifndef VECTOR_2F_H
 #define VECTOR_2F_H
 
+/*
+	A header-only helper class that exists to assist in 2D Vector operations
+		This is from an early branch of my Ronin Math Library
+*/
+
 #include <iostream>
 #define PI 3.14159265f
 
