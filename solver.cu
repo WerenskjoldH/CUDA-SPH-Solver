@@ -58,7 +58,7 @@ __global__ void calculateForces(particle* pArray, int currentParticles)
 
 			if (r2 < HSQ && r2 > 1e-12)
 			{
-				// Removal of particles - Currently Not Re-implemented
+				// Removal of particles - Currently In Testing Branch
 				//if (pArray[j].pType == OUTLET)
 				//{
 				//	pArray[i].identifier = -1;
@@ -128,6 +128,8 @@ solver::solver()
 		particles[currentParticles].mass = 0;
 		particles[currentParticles].identifier = -1;
 	}
+
+	initialize();
 }
 
 solver::~solver()
@@ -150,6 +152,7 @@ void solver::initialize()
 	gravity.y = GRAVITY_Y;
 }
 
+// This is where we apply all steps of integration and update the simulation each step
 void solver::update()
 {
 	int blocks;
@@ -164,6 +167,7 @@ void solver::update()
 
 	integration();
 }
+
 
 void solver::addParticle(vector2f pos, vector2f vel)
 {
@@ -203,6 +207,7 @@ void solver::addParticle(float mass, vector2f pos, vector2f vel)
 				break;
 			}
 }
+
 
 void solver::clearParticles()
 {

@@ -74,7 +74,6 @@ void initialize()
 
 	// Do the same as above for a solver object
 	sphSolver = std::make_unique<solver>();
-	sphSolver->initialize();
 
 #if TEST_PARTICLES
 	// This is to add all the starting particles for our simulation
