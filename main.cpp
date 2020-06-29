@@ -1,3 +1,5 @@
+#define TEST_PARTICLES 1 // Defines if we should have our Dam Break starting particles, for testing
+
 #include <stdio.h>
 #include <iostream>
 #include <memory>
@@ -7,7 +9,6 @@
 #include "solver.cuh"
 
 std::shared_ptr<window> gameWindow;
-float iTime = 0;
 
 std::unique_ptr<solver> sphSolver;
 
@@ -18,10 +19,9 @@ void update();
 void draw();
 void addParticleSquare(float x, float y, int numberOfParticles, float spacing, float particleMass = DEFAULT_MASS);
 
+// Program Starting Point
 int main(int args, char* argv[])
 {
-	gameWindow = std::make_shared<window>("SPH CUDA Flowmap - Hunter Werenskjold", WINDOW_WIDTH, WINDOW_HEIGHT);
-
 	initialize();
 
 	SDL_Event* e;
@@ -61,33 +61,42 @@ int main(int args, char* argv[])
 		update();
 
 		draw();
-
-		iTime += DELTA_TIME;
 	}
 
 	return 0;
 }
 
+// Handle all initialization logic
 void initialize()
 {
+	// Create and get a reference to a window object
+	gameWindow = std::make_shared<window>("SPH CUDA Flowmap - Hunter Werenskjold", WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	// Do the same as above for a solver object
 	sphSolver = std::make_unique<solver>();
 	sphSolver->initialize();
 
+#if TEST_PARTICLES
+	// This is to add all the starting particles for our simulation
 	for (int i = 0; i < 30; i++)
 		for (int j = 0; j < 28; j++)
 			sphSolver->addParticle(vector2f(0.1 + (i * 0.03), 0.1 + (j * 0.03)));
+#endif
 
 	std::cout << "Particles Added: " << sphSolver->currentParticles << std::endl;
-
 }
 
+// Handle all update logic
 void update()
 {
 	sphSolver->update();
 }
 
+
+// Handle all draw step logic
 void draw()
 {
+	// Gets a temporary pointer to the current SDL_Renderer
 	SDL_Renderer* renderer = gameWindow->getRenderer();
 
 	for (int x = 0; x < sphSolver->currentParticles; x++)
@@ -96,14 +105,25 @@ void draw()
 		if (sphSolver->particles[x].identifier == -1)
 			continue;
 
+		// Set the current color to draw with
 		SDL_SetRenderDrawColor(renderer, 220, 220, 255, 255);
 
+		// Draw a single point/pixel at the given coordinates
 		SDL_RenderDrawPoint(renderer, sphSolver->particles[x].position.x * WINDOW_WIDTH, sphSolver->particles[x].position.y * WINDOW_HEIGHT);
 	}
 
+	// Rasterize and draw the window
 	gameWindow->renderWindow();
 }
 
+/*
+	Adds a "solid" square of particles centered at the the given x, y coordinates
+	@param x X-axis coordinate
+	@param y Y-axis coordinate
+	@param numberOfParticles The total number of particles on one axis of the square, this give numberOfParticles^2 particles total
+	@param spacing The spacing between each particle in the square
+	@param particleMass The mass each particle will have
+*/
 void addParticleSquare(float x, float y, int numberOfParticles, float spacing, float particleMass)
 {
 	// Convert from screen to world space
