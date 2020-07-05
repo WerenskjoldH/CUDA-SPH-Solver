@@ -76,10 +76,10 @@ void gfxDrawBrenCircle(SDL_Renderer* renderer, int cx, int cy, int radius, bool 
 }
 
 /* Parameters:
-	SDL_Renderer: Render target
-	cx			: The x-axis component of the line's center
-	cy			: The y-axis component of the line's center
-	width		: The distance left and right it should go, in pixels
+	@param renderer Render target
+	@param cx		The x-axis component of the line's center
+	@param cy		The y-axis component of the line's center
+	@param width	The distance left and right it should go, in pixels
 */
 void gfxDrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int width)
 {
@@ -87,10 +87,10 @@ void gfxDrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int width)
 }
 
 /* Parameters:
-	SDL_Renderer: Render target
-	cx			: The x-axis component of the square's center
-	cy			: The y-axis component of the square's center
-	width		: The distance from the center to the top, bottom, left, and right mid-points 
+	@param renderer Render target
+	@param cx		The x-axis component of the square's center
+	@param cy		The y-axis component of the square's center
+	@param width	The distance from the center to the top, bottom, left, and right mid-points 
 */
 void gfxDrawSquare(SDL_Renderer* renderer, int cx, int cy, int width)
 {
