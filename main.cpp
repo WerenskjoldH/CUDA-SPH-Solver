@@ -14,10 +14,11 @@ std::unique_ptr<solver> sphSolver;
 
 int mouseX, mouseY;
 
-void initialize();
-void update();
-void draw();
-void addParticleSquare(float x, float y, int numberOfParticles, float spacing, float particleMass = DEFAULT_MASS);
+// Static will lock these functions to this translation unit/file
+static void initialize();
+static void update();
+static void draw();
+static void addParticleSquare(float x, float y, int numberOfParticles, float spacing, float particleMass = DEFAULT_MASS);
 
 // Program Starting Point
 int main(int args, char* argv[])
@@ -67,7 +68,7 @@ int main(int args, char* argv[])
 }
 
 // Handle all initialization logic
-void initialize()
+static void initialize()
 {
 	// Create and get a reference to a window object
 	gameWindow = std::make_shared<window>("SPH CUDA Flowmap - Hunter Werenskjold", WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -86,14 +87,14 @@ void initialize()
 }
 
 // Handle all update logic
-void update()
+static void update()
 {
 	sphSolver->update();
 }
 
 
 // Handle all draw step logic
-void draw()
+static void draw()
 {
 	// Gets a temporary pointer to the current SDL_Renderer
 	SDL_Renderer* renderer = gameWindow->getRenderer();
@@ -123,7 +124,7 @@ void draw()
 	@param spacing The spacing between each particle in the square
 	@param particleMass The mass each particle will have
 */
-void addParticleSquare(float x, float y, int numberOfParticles, float spacing, float particleMass)
+static void addParticleSquare(float x, float y, int numberOfParticles, float spacing, float particleMass)
 {
 	// Convert from screen to world space
 	float worldCenterX = x / WINDOW_WIDTH;
