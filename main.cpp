@@ -1,4 +1,4 @@
-#define TEST_PARTICLES 1 // Defines if we should have our Dam Break starting particles, for testing
+#define TEST_PARTICLES true // Defines if we should have our Dam Break starting particles, for testing
 
 #include <stdio.h>
 #include <iostream>
