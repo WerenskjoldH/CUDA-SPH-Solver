@@ -39,7 +39,14 @@ void gfxDrawFilledCircle(SDL_Renderer* renderer, int cx, int cy, int x, int y)
 	}
 }
 
-// Bresenham's Circle Algorithm
+/*
+	Draws a circle using Bresenham's Circle Algorithm
+		@param renderer Render target
+		@param cx		The x-axis component of the circle's center
+		@param cy		The y-axis component of the circle's center
+		@param radius	The radius of the circle
+		@param filled	Should the circle be filled in or outline only
+*/
 void gfxDrawBrenCircle(SDL_Renderer* renderer, int cx, int cy, int radius, bool filled)
 {
 	if (radius <= 1)
@@ -75,7 +82,8 @@ void gfxDrawBrenCircle(SDL_Renderer* renderer, int cx, int cy, int radius, bool 
 	}
 }
 
-/* Parameters:
+/* 
+	Draws a horizontal line
 	@param renderer Render target
 	@param cx		The x-axis component of the line's center
 	@param cy		The y-axis component of the line's center
@@ -86,7 +94,8 @@ void gfxDrawHorizontalLine(SDL_Renderer* renderer, int x, int y, int width)
 	SDL_RenderDrawLine(renderer, x - width, y, x + width, y);
 }
 
-/* Parameters:
+/* 
+	Draws a square
 	@param renderer Render target
 	@param cx		The x-axis component of the square's center
 	@param cy		The y-axis component of the square's center
