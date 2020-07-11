@@ -33,11 +33,32 @@ For brevity, and the fact that others have explained this far better, that is wh
 
 ---
 
+## How To Use
+
+1. Clone this repository
+2. Ensure you have the latest version of the [CUDA Runtime](https://developer.nvidia.com/cuda-downloads) installed
+3. Link the proper [SDL2](https://www.libsdl.org/download-2.0.php) API binaries
+4. Compile the project using NVCC as described [HERE](https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html)
+5. Launch the executable
+6. Press `left mouse button` to create **default mass particles** and press `right mouse button` to create **high mass particles**. To reset the scene, press the `r` key. Finally, press `esc` to close the simulation.
+
+---
+
 ## Q&A
 
 ### _Q_: Why can't I compile this code?
 
 **A**: It's likely you do not have the [CUDA Runtime](https://developer.nvidia.com/cuda-downloads) installed. The NVCC will first compile all device(GPU) code and host calls to the GPU, then compilation and further linking will be done on your default/desired c++ compiler.
+
+### _Q_: What happens if I run this without a NVIDIA driver?
+
+**A**: You can signal an emulation mode, however I did not implement this and highly suggest you don't try to run this project on a system that does not support the CUDA Runtime.
+
+### _Q_: Why didn't you use OpenCL?
+
+**A**: At the time, I had recently read a bit of the _CUDA By Example_ book and so when this project came round I felt more comfortable using CUDA over OpenCL.
+
+Perhaps in the future I will port this code to OpenCL, the mapping from CUDA to OpenCL is fairly straight forward, so it could be a good exercise for me.
 
 ### _Q_: Why aren't you using any optimizations?
 
