@@ -50,4 +50,4 @@ For brevity, and the fact that others have explained this far better, that is wh
 		{
             ...
 ```
-If I get the time to return to this project, I would like to finish my implementation and also add constraints to create things like rigid-bodies.
+If I get the time to return to this project, I would like to add things like internal boundaries and constraints to create things like rigid-bodies from clusters of bound particles.
